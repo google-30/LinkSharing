@@ -4,16 +4,17 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "Subscription")
 public class Subscription {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Topic topic;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
 
@@ -51,13 +52,7 @@ public class Subscription {
         this.dateCreated = dateCreated;
     }
 
-    @Override
-    public String toString() {
-        return "Subscription{" +
-                "topic=" + topic +
-                ", user=" + user +
-                ", dateCreated=" + dateCreated +
-                '}';
-    }
+
+
 
 }

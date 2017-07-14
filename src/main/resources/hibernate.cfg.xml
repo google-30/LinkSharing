@@ -25,6 +25,8 @@
         <mapping class="com.ttn.model.User"></mapping>
         <mapping class="com.ttn.model.Topic"></mapping>
         <mapping class="com.ttn.model.Subscription"></mapping>
+
+
         <!--<mapping class="com.ttn.model.Resource"></mapping>-->
 
     </session-factory>

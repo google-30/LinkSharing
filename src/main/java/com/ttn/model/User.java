@@ -1,8 +1,13 @@
 package com.ttn.model;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +33,49 @@ public class User {
     private Date dateCreated;
     private Date lastUpdated;
 
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "createdBy" , fetch = FetchType.LAZY)
+    private List<Topic> topics = new ArrayList<Topic>();
+
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "user" , fetch = FetchType.LAZY)
+    private List<Subscription> subscriptions = new ArrayList<Subscription>();
+
+
+
+
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
+
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", isActive=" + isActive +
+                ", dateCreated=" + dateCreated +
+                ", lastUpdated=" + lastUpdated +
+                ", topics=" + topics +
+                ", subscriptions=" + subscriptions +
+                '}';
+    }
 
     public Long getUserid() {
         return userid;
@@ -109,18 +157,4 @@ public class User {
         this.lastUpdated = lastUpdated;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", isAdmin=" + isAdmin +
-                ", isActive=" + isActive +
-                ", dateCreated=" + dateCreated +
-                ", lastUpdated=" + lastUpdated +
-                '}';
-    }
 }

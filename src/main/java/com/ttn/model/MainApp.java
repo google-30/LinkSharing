@@ -87,6 +87,16 @@ public class MainApp {
         user.setUsername("shubhamjain123");
         user.setPassword("12345");
 
+        User user1 = new User();
+        user1.setActive(true);
+        user1.setAdmin(false);
+        user1.setDateCreated(new SimpleDateFormat("dd-MM-yyyy").parse("26-12-1995"));
+        user1.setEmail("vjain@gmail.com");
+        user1.setFirstname("vasu");
+        user1.setLastname("jain");
+        user1.setUsername("shubhamjain123");
+        user1.setPassword("12345");
+
 
         TopicPerUser topicPerUser = new TopicPerUser();
         topicPerUser.setCreatedBy(user);
@@ -102,7 +112,7 @@ public class MainApp {
         topic1.setDateCreated(new SimpleDateFormat("dd-MM-yyyy").parse("30-03-1996"));
         topic1.setLastUpdated(new SimpleDateFormat("dd-MM-yyyy").parse("1-4-1996"));
         topic1.setCreatedBy(user);
-        topic1.setName("Angularjs");
+        topic1.setName("python");
 
 
 
@@ -111,6 +121,12 @@ public class MainApp {
         subscription.setTopic(topic);
         subscription.setUser(user);
         subscription.setDateCreated(new SimpleDateFormat("dd-MM-yyyy").parse("30-03-1996"));
+
+
+        Subscription subscription1 = new Subscription();
+        subscription1.setTopic(topic);
+        subscription1.setUser(user1);
+        subscription1.setDateCreated(new SimpleDateFormat("dd-MM-yyyy").parse("30-03-1996"));
 
 //        Book book = new Book();
 //        book.setBookName("Cormen");
@@ -126,12 +142,49 @@ public class MainApp {
             //   session.save(book2);
 
             session.save(user);
+            session.save(user1);
 
             session.save(topic);
+            session.save(topic1);
+
+
             session.save(subscription);
+            session.save(subscription1);
 
 
             session.getTransaction().commit();
+
+           session.close();
+
+
+            Long id = 1L;
+        Session session1 = getSession();
+            session1.beginTransaction();
+
+        //  session.save(author);
+        //   session.save(author1);
+        //  session.save(book);
+        //  session.save(book1);
+        //   session.save(book2);
+
+        user1 = (User) session1.get(User.class ,id );
+
+
+
+        System.out.println(user1);
+
+        List<Topic > topics = user1.getTopics();
+        // session.save(subscription);
+        System.out.println(user1);
+
+        session1.getTransaction().commit();
+
+        System.out.println(user1);
+
+        //List<Topic > topics = user1.getTopics();
+
+        System.out.println(topics.size());
+
 
 
 
